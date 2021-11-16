@@ -1,14 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.css'
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Constraint.css';
 
 function Constraint(props) {
     var updatedModel = props.model;
-    const [inputA, setInputA] = useState("");
-    const [inputB, setInputB] = useState("");
-    const [inputC, setInputC] = useState("");
-    const [inputD, setInputD] = useState("");
-    const [inputFinal, setInputFinal] = useState("");
+    const [inputA, setInputA] = useState(1);
+    const [inputB, setInputB] = useState(1);
+    const [inputC, setInputC] = useState(1);
+    const [inputD, setInputD] = useState(1);
+    const [inputFinal, setInputFinal] = useState(1);
 
     const updateModel = (e) => {
         e.preventDefault();
@@ -16,7 +16,7 @@ function Constraint(props) {
         updatedModel["variables"]["InvestimentoB"][props.tag] = parseFloat(inputB);
         updatedModel["variables"]["InvestimentoC"][props.tag] = parseFloat(inputC);
         updatedModel["variables"]["InvestimentoD"][props.tag] = parseFloat(inputD);
-        updatedModel["constraints"][props.tag] = {"max": parseFloat(inputFinal)};
+        updatedModel["constraints"][props.tag] = { "max": parseFloat(inputFinal) };
         props.updateGlobalModel(updatedModel);
     }
 

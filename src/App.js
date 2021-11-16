@@ -2,8 +2,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './App.css';
 import Form from './Form'
 
-
-
 function App() {
   return (
     <div className="container p-5">
