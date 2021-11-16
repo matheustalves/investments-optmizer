@@ -3,9 +3,7 @@ import React, {useState} from 'react';
 import './Constraint.css';
 
 function Constraint(props) {
-    // console.log(props.tag);
-    // console.log(props.model);
-
+    var updatedModel = props.model;
     const [inputA, setInputA] = useState("");
     const [inputB, setInputB] = useState("");
     const [inputC, setInputC] = useState("");
@@ -13,14 +11,13 @@ function Constraint(props) {
     const [inputFinal, setInputFinal] = useState("");
 
     const updateModel = (e) => {
-        // props.model["variables"]["InvestimentoA"][props.tag] = document.getElementById("input-" + props.tag + "-a").value;
         e.preventDefault();
-        props.model["variables"]["InvestimentoA"][props.tag] = inputA;
-        props.model["variables"]["InvestimentoB"][props.tag] = inputB;
-        props.model["variables"]["InvestimentoC"][props.tag] = inputC;
-        props.model["variables"]["InvestimentoD"][props.tag] = inputD;
-        props.model["constraints"][props.tag] = {"max": inputFinal};
-        console.log(props.model)
+        updatedModel["variables"]["InvestimentoA"][props.tag] = parseFloat(inputA);
+        updatedModel["variables"]["InvestimentoB"][props.tag] = parseFloat(inputB);
+        updatedModel["variables"]["InvestimentoC"][props.tag] = parseFloat(inputC);
+        updatedModel["variables"]["InvestimentoD"][props.tag] = parseFloat(inputD);
+        updatedModel["constraints"][props.tag] = {"max": parseFloat(inputFinal)};
+        props.updateGlobalModel(updatedModel);
     }
 
     return (

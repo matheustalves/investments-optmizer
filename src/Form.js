@@ -2,8 +2,7 @@ import Constraint from './Constraint'
 import React, {useState} from 'react'
 
 function Form(props) {
-    // var constrCounter = 1;
-    var model = {
+    const [model, setModel] = useState({
         "optimize": "rendimentoAno",
         "opType": "max",
         "constraints": {
@@ -22,23 +21,16 @@ function Form(props) {
                 "rendimentoAno": 0.18,
             },
         }
-    }
+    });
 
     const [constrCounter, setCounter] = useState(1);
 
     const newConstraint = (e) => {
         e.preventDefault();
-        // constrCounter += 1;
-        // constraints.push(constrCounter)
-        // console.log(constraints)
         setCounter(constrCounter + 1);
         console.log(model);
     }
 
-    const printModel = (e) => {
-        e.preventDefault();
-        console.log(model)
-    }
     return (
         <form>
             <div className="mb-3">
@@ -75,11 +67,10 @@ function Form(props) {
             <h2>Restrições</h2>
 
             <div className="container justify-content-center" id="constrDiv">
-                {[...Array(constrCounter)].map((_, i) => <Constraint key={i} id={"restricao" + constrCounter} tag={"restricao" + constrCounter} model={model}/>)}
+                {[...Array(constrCounter)].map((_, i) => <Constraint key={i} id={"restricao" + constrCounter} tag={"restricao" + constrCounter} model={model} updateGlobalModel={setModel}/>)}
             </div>
 
             <button className="btn btn-primary" onClick={newConstraint}>Nova Restrição</button>
-            {/* <button className="btn btn-primary" onClick={printModel}>Nova Restrição</button> */}
         </form>
     );
 }
