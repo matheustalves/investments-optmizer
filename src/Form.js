@@ -38,12 +38,13 @@ function Form(props) {
         console.log(model);
     }
 
-    const calcInvestment = (e) => {
+    const calcInvestments = (e) => {
         e.preventDefault();
         console.log(model);
         var solver = Solver, results;
         results = solver.Solve(model);
-        console.log(results);
+        props.updateResults(results);
+        props.updateHasResults(true);
     }
 
     const updateModel = (e) => {
@@ -57,35 +58,35 @@ function Form(props) {
     }
 
     return (
-        <form>
+        <form onSubmit={calcInvestments}>
             <div className="p-2">
-                <label htmlFor="inputMontante" className="form-label">Montante Disponível</label>
-                <input type="number" className="form-control" id="inputMontante" value={inputMontante} onChange={e => setMontante(e.target.value)}></input>
+                <label htmlFor="inputMontante" className="form-label">💰 Montante Disponível</label>
+                <input type="number" className="form-control" id="inputMontante" value={inputMontante} onChange={e => setMontante(e.target.value)} min={0.0} step={0.01} required></input>
             </div>
 
             <div className="row py-2">
                 <div className="col">
                     <div className="p-2">
-                        <label htmlFor="inputRA" className="form-label">Rendimento/ano do Investimento A</label>
-                        <input type="number" className="form-control" id="inputRA" value={inputRA} onChange={e => setRA(e.target.value)}></input>
+                        <label htmlFor="inputRA" className="form-label">💹 Rendimento/ano do Investimento A</label>
+                        <input type="number" className="form-control" id="inputRA" value={inputRA} onChange={e => setRA(e.target.value)} min={0.0} max={1.0} step={0.001} required></input>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-2">
-                        <label htmlFor="inputRB" className="form-label">Rendimento/ano do Investimento B</label>
-                        <input type="number" className="form-control" id="inputRB" value={inputRB} onChange={e => setRB(e.target.value)}></input>
+                        <label htmlFor="inputRB" className="form-label">💹 Rendimento/ano do Investimento B</label>
+                        <input type="number" className="form-control" id="inputRB" value={inputRB} onChange={e => setRB(e.target.value)} min={0.0} max={1.0} step={0.001} required></input>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-2">
-                        <label htmlFor="inputRC" className="form-label">Rendimento/ano do Investimento C</label>
-                        <input type="number" className="form-control" id="inputRC" value={inputRC} onChange={e => setRC(e.target.value)}></input>
+                        <label htmlFor="inputRC" className="form-label">💹 Rendimento/ano do Investimento C</label>
+                        <input type="number" className="form-control" id="inputRC" value={inputRC} onChange={e => setRC(e.target.value)} min={0.0} max={1.0} step={0.001} required></input>
                     </div>
                 </div>
                 <div className="col">
                     <div className="p-2">
-                        <label htmlFor="inputRD" className="form-label">Rendimento/ano do Investimento D</label>
-                        <input type="number" className="form-control" id="inputRD" value={inputRD} onChange={e => setRD(e.target.value)}></input>
+                        <label htmlFor="inputRD" className="form-label">💹 Rendimento/ano do Investimento D</label>
+                        <input type="number" className="form-control" id="inputRD" value={inputRD} onChange={e => setRD(e.target.value)} min={0.0} max={1.0} step={0.001} required></input>
                     </div>
                 </div>
             </div>
@@ -103,15 +104,16 @@ function Form(props) {
             </div>
 
             <div className="text-center p-2">
-                <p className="fw-bold">A, B, C, D {'>'}= 0 (Quantia para cada Investimento)</p>
+                <p className="fst-italic">A, B, C, D {'>'}= 0 (Quantia para cada Investimento)</p>
             </div>
 
             <div className="d-flex flex-row justify-content-center">
                 <div className="px-2">
-                    <button className="btn btn-success" onClick={calcInvestment}>Calcular</button>
+                    {/* <button className="btn btn-success" onClick={calcInvestments}>💱 Calcular</button> */}
+                    <input type="submit" className="btn btn-success" value="💱 Calcular"></input>
                 </div>
                 <div className="px-2">
-                    <button className="btn btn-primary" onClick={newConstraint}>Nova Restrição</button>
+                    <button className="btn btn-primary" onClick={newConstraint}>❕ Nova Restrição</button>
                 </div>
             </div>
 
